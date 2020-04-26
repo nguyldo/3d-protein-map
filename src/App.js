@@ -8,21 +8,14 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      coords: [
-        [0, 0, 0],
-        [1, 1, 0],
-        [2, 2, 0],
-        [3, 3, 0],
-        [1, -1, 0],
-        [2, -2, 0],
-        [3, -3, 0]
-      ]
+      coords: props.location.state.coords
     }
   }
 
   componentDidMount() {
 
-    
+    console.log("Rendered");
+    console.log(typeof this.state.coords);
 
     var scene = new THREE.Scene();
     var raycaster = new THREE.Raycaster();
@@ -39,7 +32,7 @@ export default class App extends React.Component {
     
     }
 
-    window.addEventListener( 'mousemove', onMouseMove, false );
+    window.addEventListener( 'click', onMouseMove, false );
 
     var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
     
@@ -56,7 +49,7 @@ export default class App extends React.Component {
     var axesHelper = new THREE.AxesHelper( 5 );
     scene.add( axesHelper );
     
-    for (let i = 0; i < 7; i++) {
+    for (let i = 0; i < this.state.coords.length; i++) {
       var geometry = new THREE.SphereGeometry();
       var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
       var point = new THREE.Mesh( geometry, material );
@@ -81,7 +74,8 @@ export default class App extends React.Component {
 
       for ( var i = 0; i < intersects.length; i++ ) {
 
-        intersects[ i ].object.material.color.set( 0xff0000 );
+        
+        intersects[i].object.material.color.set( 0xffffff );
   
       }
 
