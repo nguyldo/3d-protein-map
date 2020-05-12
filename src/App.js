@@ -34,17 +34,13 @@ export default class App extends React.Component {
 
     window.addEventListener( 'click', onMouseMove, false );
 
-    var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
+    var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 12000 );
     
     var renderer = new THREE.WebGLRenderer();
 		renderer.setSize( window.innerWidth, window.innerHeight );
     document.body.appendChild( renderer.domElement );
 
     var controls = new OrbitControls( camera, renderer.domElement );
-
-    camera.position.set(15, 15, 15);
-    //camera.up.set( 0, 0, 1 );
-    camera.lookAt(0, 0, 0);
     
     var axesHelper = new THREE.AxesHelper( 5 );
     scene.add( axesHelper );
@@ -56,13 +52,16 @@ export default class App extends React.Component {
       point.position.x = this.state.coords[i][0];
       point.position.y = this.state.coords[i][1];
       point.position.z = this.state.coords[i][2];
-      point.scale.x = .2;
-      point.scale.y = .2;
-      point.scale.z = .2;
+      point.scale.x = 16;
+      point.scale.y = 16;
+      point.scale.z = 16;
       scene.add(point);
     }
 
-    camera.position.z = 20;
+    //camera.position.z = 51;
+    camera.position.set(12000, 12000, 12000);
+    //camera.up.set( 0, 0, 1 );
+    camera.lookAt(0, 0, 0);
     
     var animate = function () {
       requestAnimationFrame( animate );
